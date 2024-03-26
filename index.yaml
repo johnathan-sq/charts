@@ -3,7 +3,17 @@ entries:
   generic-deployment:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2024-03-26T20:03:43.753771+11:00"
+    created: "2024-03-26T20:40:48.604406+11:00"
+    description: A Helm chart for Kubernetes
+    digest: 4b7c4aec2a32fe3ef2131de7769f6e2104e52c246185efbabda390ae256e9855
+    name: generic-deployment
+    type: application
+    urls:
+    - https://johnathan-sq.github.io/charts/generic-deployment-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2024-03-26T20:40:48.604289+11:00"
     description: A Helm chart for Kubernetes
     digest: 019eb15a27474c648bac697c5fed1484c3f83b4f8dbb8b794956209aaeed9257
     name: generic-deployment
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://johnathan-sq.github.io/charts/generic-deployment-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-26T20:03:43.753509+11:00"
+generated: "2024-03-26T20:40:48.603995+11:00"

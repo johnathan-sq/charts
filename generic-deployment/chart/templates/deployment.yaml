@@ -4,6 +4,7 @@ metadata:
   name: my-chart
   labels:
     app: my-chart
+    version: {{ .Chart.Version }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
