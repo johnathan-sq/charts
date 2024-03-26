@@ -1,18 +1,44 @@
 #!/bin/bash
 
-# Configuration
-export CHART_DIR="chart"
-export CHART_NAME="mychart"
-export CHART_VERSION="0.1.0"
-export CHARTMUSEUM_URL="http://localhost:8080"
+# Configuration variables
+REPO_URL="https://johnathan-sq.github.io/charts/" # URL of your GitHub repository
+CHART_REPO_NAME="charts" # Name of your Helm chart repository
+CHART_DIR="./chart" # Path to your Helm chart directory
 
-# Navigate to the chart directory
-cd "$CHART_DIR"
+# Check if gh-pages branch exists and switch to it, otherwise create it
+if git show-ref --quiet refs/heads/gh-pages; then
+    echo "Switching to gh-pages branch..."
+    git checkout gh-pages
+else
+    echo "Creating gh-pages branch..."
+    git checkout --orphan gh-pages
+    git reset --hard
+    git commit --allow-empty -m "Initializing gh-pages branch"
+    git push origin gh-pages
+    git checkout gh-pages
+fi
+
+# Ensure the script is run from the repository root
+if [ ! -d "$CHART_DIR" ]; then
+    echo "Please run this script from the root of your repository where your chart directory is located."
+    exit 1
+fi
 
 # Package the Helm chart
-helm package . --version "$CHART_VERSION"
+echo "Packaging Helm chart..."
+helm package $CHART_DIR --destination .
 
-# Upload the chart to ChartMuseum
-curl --data-binary "@${CHART_NAME}-${CHART_VERSION}.tgz" $CHARTMUSEUM_URL/api/charts
+# Generating or updating index.yaml
+echo "Updating index.yaml..."
+helm repo index . --url $REPO_URL --merge index.yaml
 
-echo "Chart uploaded successfully."
+# Commit and push changes
+echo "Committing and pushing changes to GitHub..."
+git add .
+git commit -m "Update Helm chart repository"
+git push origin gh-pages
+
+# Switch back to the main branch (optional)
+# git checkout main
+
+echo "Helm chart repository updated on gh-pages branch."
