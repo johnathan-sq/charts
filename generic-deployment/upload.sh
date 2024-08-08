@@ -3,7 +3,7 @@
 # Configuration variables
 REPO_URL="https://johnathan-sq.github.io/charts/" # URL of your GitHub repository
 CHART_REPO_NAME="charts" # Name of your Helm chart repository
-CHART_DIR="./chart" # Path to your Helm chart directory
+CHART_DIR="./generic-deployment/chart" # Path to your Helm chart directory
 
 # Check if gh-pages branch exists and switch to it, otherwise create it
 if git show-ref --quiet refs/heads/gh-pages; then
