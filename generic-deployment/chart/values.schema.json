@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "replicaCount": {
+      "type": "integer",
+      "maximum": 50,
+      "description": "The number of replicas to deploy."
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "description": "The image repository."
+        },
+        "pullPolicy": {
+          "type": "string",
+          "enum": ["Always", "IfNotPresent", "Never"],
+          "description": "The pull policy for the image."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The tag of the image."
+        }
+      },
+      "required": ["repository", "pullPolicy", "tag"]
+    }
+  },
+  "required": ["replicaCount", "image"]
+}
